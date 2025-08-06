@@ -1,6 +1,8 @@
-let listaDeNumerosSorteados = []
+let listaDeNumerosSorteados = [];
+let numeroLimite = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
+
 
 function exibirTextoNaTela(tag, texto){
     let campo = document.querySelector(tag);
@@ -46,9 +48,19 @@ function verificarChute(){
 
 
 function gerarNumeroAleatorio(){
-    let numeroEscolhido = parseInt(Math.random() * 10 + 1);
+    let numeroEscolhido = parseInt(Math.random() * numeroLimite + 1);
+    let quantidadeDeElementosNaLista = listaDeNumerosSorteados.length;
+
+    if(quantidadeDeElementosNaLista == numeroLimite){
+        listaDeNumerosSorteados = [];
+    }
+
+    //método para não ter repetição de números escolhidos
     if (listaDeNumerosSorteados.includes(numeroEscolhido)){//includes verifica se ja há numero igual na lista
         return gerarNumeroAleatorio();
+    }else{
+        listaDeNumerosSorteados.push(numeroEscolhido); //push adiciona número no final da lista
+        return numeroEscolhido;
     }
 }//função sem parâmetro com retorno
 
